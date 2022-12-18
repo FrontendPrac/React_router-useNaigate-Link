@@ -1,28 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Detail() {
+  const params = useParams();
+  const bucket_list = useSelector((store) => store.bucket.list);
+  const bucket_index = params.index;
 
-  const [list, setList] = React.useState([
-    "영화관 가기",
-    "매일 책읽기",
-    "수영 배우기",
-  ]);
-  const text = React.useRef(null);
-
-  const addBucketList = () => {
-    setList([...list, text.current.value]);
+  const onClickDeleteHandler = () => {
+    console.log("ss");
   };
+
+  // console.log(params);
+  // console.log(bucket_list);
+  // console.log(bucket_list[bucket_index]);
+
   return (
     <div className="App">
       <Container>
         <Title>내 버킷리스트</Title>
         <Line />
-        <h1>상세 페이지입니다!</h1>
+        <h1>{bucket_list[bucket_index]}</h1>
+        <button onClick={onClickDeleteHandler}>삭제하기</button>
       </Container>
       <Input>
-        <input type="text" ref={text} />
-        <button onClick={addBucketList}>추가하기</button>
+        <input type="text" />
+        <button>추가하기</button>
       </Input>
     </div>
   );

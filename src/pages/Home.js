@@ -1,24 +1,30 @@
 import React from "react";
 import BucketList from "./BucketList";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { createBucket } from "../redux/modules/bucket";
 
 function Home() {
-  const [list, setList] = React.useState([
-    "영화관 가기",
-    "매일 책읽기",
-    "수영 배우기",
-  ]);
+  const dispatch = useDispatch();
+
+  // const [list, setList] = React.useState([
+  //   "영화관 가기",
+  //   "매일 책읽기",
+  //   "수영 배우기",
+  // ]);
   const text = React.useRef(null);
 
   const addBucketList = () => {
-    setList([...list, text.current.value]);
+    // setList([...list, text.current.value]);
+    dispatch(createBucket(text.current.value));
   };
+
   return (
     <div className="App">
       <Container>
         <Title>내 버킷리스트</Title>
         <Line />
-        <BucketList list={list} />
+        <BucketList />
       </Container>
       <Input>
         <input type="text" ref={text} />

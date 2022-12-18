@@ -2,22 +2,24 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
 
-const BucketList = (props) => {
+const BucketList = () => {
+  const my_lists = useSelector((store) => store.bucket.list);
+  console.log(my_lists);
+
   const navigate = useNavigate();
-
-  const onClickHandler = () => {
-    navigate("/detail")
-  }
-
-  const my_lists = props.list;
 
   return (
     <ListStyle>
       {my_lists.map((list, index) => {
         return (
-          <ItemStyle className="list_item" key={index} onClick={onClickHandler}>
+          <ItemStyle
+            className="list_item"
+            key={index}
+            onClick={() => navigate("/detail/" + index)}
+          >
             {list}
             {/* <Link to="/detail">{list}</Link> */}
           </ItemStyle>
